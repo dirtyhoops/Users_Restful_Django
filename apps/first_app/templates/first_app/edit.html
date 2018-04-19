@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit User</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'first_app/css/styles.css' %}">
+    <!-- <link rel="stylesheet" type="text/css" href="../../static/first_app/css/styles.css"> -->
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</head>
+<body>
+    <div class="container">
+        <h3>Edit User {{user.id}}</h3>
+        {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+        <div class="newuserform">
+            <form action='/users/update/{{user.id}}', method = "post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>First Name:</label>
+                    <input type="text" class="form-control" name="first_name" value="{{user.first_name}}">
+                </div>
+                <div class="form-group">
+                        <label>Last Name:</label>
+                        <input type="text" class="form-control" name="last_name" value="{{user.last_name}}">
+                </div>
+                <div class="form-group">
+                        <label>Email:</label>
+                        <input type="text" class="form-control" name="email" value="{{user.email}}">
+                </div>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+
+            <a href="/user/{{user.id}}" class="btn btn-info" role="button">Show</a>
+            <a href="/" class="btn btn-info" role="button">Go Back</a>
+        </div>
+    </div>  <!-- end of container -->
+    
+</body>
+</html>
